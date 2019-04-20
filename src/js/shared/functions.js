@@ -62,7 +62,6 @@ export function paintChart(data, colorTablet, colorSmartphone, category) {
   var pie = d3.pie()
     .sort(null)
     .value(function (d) {
-      console.log('d what they are?', d.count)
       return d.count;
     });
 
@@ -96,14 +95,14 @@ export function paintChart(data, colorTablet, colorSmartphone, category) {
 
   g.append("text")
     .attr("text-anchor", "middle")
-    .attr('font-size', '4em')
+    .attr('font-size', '3.5em')
     .attr('y', 30)
     .text(totalFormated + '€')
     .attr('class', 'circle');
 
   g.append("text")
     .attr("text-anchor", "middle")
-    .attr("font-size", '3em')
+    .attr("font-size", '2.5em')
     .style('fill', '#969696')
     .attr('y', -40)
     .text(categoryUC);

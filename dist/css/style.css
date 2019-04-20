@@ -1,3 +1,7 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .charts-container{
   display: inline-flex;
   margin-top: 100px;
@@ -30,4 +34,9 @@
 
 .percentage, .amount {
   font-size: 1.3em;
+}
+
+.amount {
+  color: #969696;
+  padding-left: 10px
 }
