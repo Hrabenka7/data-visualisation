@@ -1,0 +1,33 @@
+.charts-container{
+  display: inline-flex;
+  margin-top: 100px;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+
+.column-right {
+  text-align: right
+}
+
+.donutChart {
+  border-bottom: 2px solid grey;
+  margin-right: 20px;
+  margin-left: 20px;
+  padding-bottom: 15px;
+}
+
+.column.tablet, .column.smartphone {
+  font-weight: 900;
+  font-size: 1.3em;
+  padding-bottom: 5px;
+}
+
+.percentage, .amount {
+  font-size: 1.3em;
+}

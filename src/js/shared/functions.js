@@ -108,3 +108,23 @@ export function paintChart(data, colorTablet, colorSmartphone, category) {
     .attr('y', -40)
     .text(categoryUC);
 }
+
+// paint legend
+
+export function paintLegend(data, colorTablet, colorSmartphone, category) {
+  document.getElementById('percentageTablet' + category)
+    .innerHTML = countPercentage(data.tablet, data.total) + '%'
+
+  document.getElementById('percentageSmartphone' + category)
+    .innerHTML = countPercentage(data.smartphone, data.total) + '%'
+
+  document.getElementById('amountTablet' + category)
+    .innerHTML = formatNumber(data.tablet) + '€'
+
+  document.getElementById('amountSmartphone' + category)
+    .innerHTML = formatNumber(data.smartphone) + '€'
+
+  document.getElementById('tablet' + category).style.color = colorTablet
+  document.getElementById('smartphone' + category).style.color = colorSmartphone
+
+}
