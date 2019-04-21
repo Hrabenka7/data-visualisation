@@ -49,6 +49,26 @@ export function paintChart(data, colorTablet, colorSmartphone, category) {
   const percentageTablet = countPercentage(tablet, total)
   const percentageSmartphone = countPercentage(smartphone, total)
 
+  //set color graph area 
+  let colourArea;
+  console.log('Category', category)
+
+  switch (category) {
+    case "Revenue":
+      colourArea = '#eff9e8'
+      break;
+    case "Impresions":
+      colourArea = '#e6eef7'
+      break;
+    case "Visits":
+      colourArea = '#f7f4de'
+      break;
+      
+      default:
+      colourArea = '#ffffff'
+  }
+
+  console.log('colourArea', colourArea)
 
   var dataChart = [
     { name: 'Smartphone', count: smartphone, percentage: percentageSmartphone, color: colorSmartphone },
@@ -63,6 +83,7 @@ export function paintChart(data, colorTablet, colorSmartphone, category) {
   var arc = d3.arc()
     .outerRadius(radius - 10)
     .innerRadius(240);
+  
 
   var pie = d3.pie()
     .sort(null)
@@ -72,11 +93,16 @@ export function paintChart(data, colorTablet, colorSmartphone, category) {
 
 
   /** add pie chart to the div id*/
+
   var svg = d3.select('#donut' + category).append("svg")
     .attr("width", width)
     .attr("height", height)
     .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    if(svg) {
+      console.log('hey svg just rendered')
+    }
 
   var g = svg.selectAll(".arc")
     .data(pie(dataChart))
@@ -143,63 +169,56 @@ export function paintChart(data, colorTablet, colorSmartphone, category) {
     .style('fill', '#969696')
 
 
-  // line
-  // var typeData = [
-  //   { x: 0, y: 0, },
-  //   { x: 1, y: 1, },
-  //   { x: 2, y: 2, },
-  //   { x: 3, y: 3, },
-  //   { x: 4, y: 4, },
-  //   { x: 5, y: 5, },
-  //   { x: 6, y: 6, },
-  // ];
-
-  // var margin = { top: 0, right: 0, bottom: 0, left: 0 },
-  //   width = 200 - margin.left - margin.right,
-  //   height = 150 - margin.top - margin.bottom;
+  // line chart
   
-  // var x = d3.scaleLinear()
-  //   .domain([0, d3.max(data, function (d) { return d.x; })])
-  //   .range([0, width]);
+  var data = [3, 2.2, 2.4, 3, 3.2, 2.4, 2.5, 3.5, 3, 3.5, 4, 3, 4, 4.2, 3.5, 3];
+  var width = 400, height = 400;
 
-  // var y = d3.scaleLinear()
-  //   .domain([0, d3.max(data, function (d) { return d.y; })])
-  //   .range([height, 0]);
+  var x = d3.scaleLinear()
+    .range([0, width])
+    .domain([0, data.length - 1]);
 
-  // var xAxis = d3.axisBottom(x)
+  var y = d3.scaleLinear()
+    .range([height, 0])
+    .domain([0, 10]);
 
-  // var yAxis = d3.axisLeft(y);
+  var xAxis = d3.axisBottom(x)
 
-  
+  var yAxis = d3.axisLeft(y);
 
-  // var area = d3.area()
-  //   .x(function (d) {
-  //     console.log('d',d) 
-  //     return x(d.x); })
-  //   .y0(height)
-  //   .y1(function (d) { return y(d.y); })
-  //   .curve(d3.curveLinear)
-    
+  var line = d3.area()
+    .x(function (d, i) { return x(i); })
+    .y1(function (d) { return y(d); })
+    .y0(height)
+    .curve(d3.curveBasis);
 
-  // // var svg = d3.select("svg#area")
-  // //   .attr("width", width + margin.left + margin.right)
-  // //   .attr("height", height + margin.top + margin.bottom)
-  // //   .append("g")
-  // //   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  //var svg1 = d3.select("body").append("svg")
+  var svg1 = d3.select("svg").append("svg")
+    .attr("width", width + 60)
+    .attr("height", height + 50)
+    .append("g")
+    .attr("transform", "translate(80, 60)")  
 
-  // g.append("path")
-  //   .datum(data)
-  //   .attr("class", "area")
-  //   .attr("d", area);
+  if(svg1) {
+    console.log('svg1 too')
+  }
 
-  // g.append("g")
-  //   .attr("class", "x axis")
-  //   .attr("transform", "translate(0," + height + ")")
-  //   .call(xAxis);
+  svg1.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    //.call(xAxis);
 
-  // g.append("g")
-  //   .attr("class", "y axis")
-  //   .call(yAxis);
+  svg1.append("g")
+    .attr("class", "y axis")
+    //.call(yAxis)
+
+  svg1.append("path")
+    .datum(data)
+    .attr("class", "line")
+    .attr("d", line)
+    .attr("fill", colourArea )
+    .attr('stroke', colorTablet)
+    .attr("stroke-width", 2)
 
 
   }
