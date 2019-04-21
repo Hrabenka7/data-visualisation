@@ -4,21 +4,26 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: ['babel-polyfill', './src/js/index.js'], 
-  output: {
+  output: 
+  {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/bundle.js' 
   },
   //mode: 'development',
-  devServer: {
+  devServer: 
+  {
     contentBase: './dist'  // webpack serving file
-   },  // automatic reload and bundle
-   plugins: [
+   },  
+   // automatic reload and bundle
+   plugins: 
+   [
      new HtmlWebpackPlugin({
-       filename: 'index.html',
+       filename: 'index.html',  // copy index.html to the dist index.html
        template: './src/index.html'
-     }) // copy index.html to the dist index.html
+     })
    ],
-   module: {
+   module: 
+   {
      rules: [
        {
          test: /\.js$/, // look for all js files
