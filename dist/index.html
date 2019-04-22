@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,26 +12,71 @@
 <body>
 
     <body>
+        <div class="charts-container">
+
+            <div class="donutChart" id="revenueChart">
+                <div id="donutRevenue"></div>
+
+                <div id="legendRevenue">
+                    <div class="row">
+                        <div class="column tablet" id="tabletRevenue">Tablet</div>
+                        <div class="column smartphone column-right" id="smartphoneRevenue">Smartphone</div>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <span class="percentage" id="percentageTabletRevenue"></span>
+                            <span class="amount" id="amountTabletRevenue"></span>
+                        </div>
+                        <div class="column column-right">
+                            <span class="percentage" id="percentageSmartphoneRevenue"></span>
+                            <span class="amount" id="amountSmartphoneRevenue"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
 
-        <div class="donutChart" id="revenueChart">
-            <div id="donutRevenue"></div>
-            <div id="legendRevenue"></div>
+            <div class="donutChart" id="impresionsChart">
+                <div id="donutImpresions"></div>
+                <div id="legendImpresions">
+                    <div class="row">
+                        <div class="column tablet" id="tabletImpresions">Tablet</div>
+                        <div class="column smartphone column-right" id="smartphoneImpresions">Smartphone</div>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <span class="percentage" id="percentageTabletImpresions"></span>
+                            <span class="amount" id="amountTabletImpresions"></span>
+                        </div>
+                        <div class="column column-right">
+                            <span class="percentage" id="percentageSmartphoneImpresions"></span>
+                            <span class="amount" id="amountSmartphoneImpresions"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        </div>
-
-
-        <div class="donutChart" id="impresionsChart">
-            <div id="donutImpresions"></div>
-            <div id="legendImpresions">
+            <div class="donutChart" id="visitsChart">
+                <div id="donutVisits"></div>
+                <div id="legendVisits">
+                    <div class="row">
+                        <div class="column tablet" id="tabletVisits">Tablet</div>
+                        <div class="column smartphone column-right" id="smartphoneVisits">Smartphone</div>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <span class="percentage" id="percentageTabletVisits"></span>
+                            <span class="amount" id="amountTabletVisits"></span>
+                        </div>
+                        <div class="column column-right">
+                            <span class="percentage" id="percentageSmartphoneVisits"></span>
+                            <span class="amount" id="amountSmartphoneVisits"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="donutChart" id="visitsChart">
-            <div id="donutVisits"></div>
-            <div id="legendVisits"></div>
-        </div>
-    
         
 
     <script type="text/javascript" src="js/bundle.js"></script></body>

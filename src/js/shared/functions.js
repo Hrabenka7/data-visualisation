@@ -34,7 +34,7 @@ export function countPercentage(device, total) {
  *  @param {string} category visits || impresions || revenue
  */
 
-export function paintChart(data, colorTablet, colorSmartphone, category) {
+export async function paintPieChart(data, colorTablet, colorSmartphone, category) {
 
   // variables
   const total = data.total
@@ -48,27 +48,6 @@ export function paintChart(data, colorTablet, colorSmartphone, category) {
   // count percentage
   const percentageTablet = countPercentage(tablet, total)
   const percentageSmartphone = countPercentage(smartphone, total)
-
-  //set color graph area 
-  let colourArea;
-  console.log('Category', category)
-
-  switch (category) {
-    case "Revenue":
-      colourArea = '#eff9e8'
-      break;
-    case "Impresions":
-      colourArea = '#e6eef7'
-      break;
-    case "Visits":
-      colourArea = '#f7f4de'
-      break;
-      
-      default:
-      colourArea = '#ffffff'
-  }
-
-  console.log('colourArea', colourArea)
 
   var dataChart = [
     { name: 'Smartphone', count: smartphone, percentage: percentageSmartphone, color: colorSmartphone },
@@ -168,11 +147,37 @@ export function paintChart(data, colorTablet, colorSmartphone, category) {
     .attr("height", 5)
     .style('fill', '#969696')
 
+  }
 
-  // line chart
-  
-  var data = [3, 2.2, 2.4, 3, 3.2, 2.4, 2.5, 3.5, 3, 3.5, 4, 3, 4, 4.2, 3.5, 3];
+// paint area chart
+
+export function paintAreaChart(colorTablet, category) {
+
+  if(category === "Impresions") {
+    var data = [3, 3.5, 4.2, 4, 3, 4, 3.5, 3, 3.5, 2.5, 2.4, 3.2, 3, 2.4, 2.2, 3];
+  }
+  else {
+    var data = [3, 2.2, 2.4, 3, 3.2, 2.4, 2.5, 3.5, 3, 3.5, 4, 3, 4, 4.2, 3.5, 3];
+  }
   var width = 400, height = 400;
+
+  //set color graph area 
+  let colourArea;
+
+  switch (category) {
+    case "Revenue":
+      colourArea = "#eff9e8"
+      break;
+    case "Impresions":
+      colourArea = "#e6eef7"
+      break;
+    case "Visits":
+      colourArea = "#f7f4de"
+      break;
+
+    default:
+      colourArea = "#ffffff"
+  }
 
   var x = d3.scaleLinear()
     .range([0, width])
@@ -182,9 +187,9 @@ export function paintChart(data, colorTablet, colorSmartphone, category) {
     .range([height, 0])
     .domain([0, 10]);
 
-  var xAxis = d3.axisBottom(x)
+  //var xAxis = d3.axisBottom(x)
 
-  var yAxis = d3.axisLeft(y);
+  //var yAxis = d3.axisLeft(y);
 
   var line = d3.area()
     .x(function (d, i) { return x(i); })
@@ -193,35 +198,40 @@ export function paintChart(data, colorTablet, colorSmartphone, category) {
     .curve(d3.curveBasis);
 
   //var svg1 = d3.select("body").append("svg")
-  var svg1 = d3.select("svg").append("svg")
+  // (`"#donut${category} svg"`)
+  var svg1 = d3.select("#donut" + category).select("svg").append("svg")
     .attr("width", width + 60)
     .attr("height", height + 50)
     .append("g")
-    .attr("transform", "translate(80, 60)")  
+    .attr("transform", "translate(80, 60)")
 
-  if(svg1) {
+  if (svg1) {
     console.log('svg1 too')
   }
 
   svg1.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
-    //.call(xAxis);
+  //.call(xAxis);
 
   svg1.append("g")
     .attr("class", "y axis")
-    //.call(yAxis)
+  //.call(yAxis)
 
   svg1.append("path")
     .datum(data)
     .attr("class", "line")
     .attr("d", line)
-    .attr("fill", colourArea )
+    .attr("fill", colourArea)
     .attr('stroke', colorTablet)
     .attr("stroke-width", 2)
 
+}
 
-  }
+
+
+
+
 // paint legend
 
 export function paintLegend(data, colorTablet, colorSmartphone, category) {
