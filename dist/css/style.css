@@ -2,11 +2,6 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-.charts-container{
-  display: inline-flex;
-  margin-top: 100px;
-}
-
 .row {
   display: flex;
 }
@@ -17,6 +12,10 @@ body {
 
 .column-right {
   text-align: right
+}
+
+.column-left {
+  text-align: left
 }
 
 .donutChart {
@@ -40,3 +39,71 @@ body {
   color: #969696;
   padding-left: 10px
 }
+
+
+
+/* same size as the chartView(chart+legend) which neeeds to be each the same size as well */
+.slider-container {
+  width: 540px;
+  height: 630px;
+  /* center image */
+  margin-left: auto;
+  margin-right: auto;
+  /* hide other images */
+  overflow: hidden;
+  /* align slider buttons*/
+  text-align: center
+
+}
+
+/* added width of all the chartViews, height same as a single chartView height */
+.view-container {
+  width: 1620px;
+  height: 630px;
+  position: relative;
+  transition: left 2s;
+  /* chrome */
+  -webkit-transition: left 2s;
+  /* mozilla */
+  -moz-transition: left 2s;
+  /* opera */
+  -o-transition: left 2s;
+  /* safari? */
+}
+
+.slider-view {
+  float: left;
+  margin: 0px;
+  padding: 0px;
+}
+
+.button-container {
+  /* shows on top of the image*/
+  top: -20px;
+  position: relative;
+}
+
+.slider-button {
+  display:inline-block;
+  height: 10px;
+  width: 10px;
+  border-radius: 5px;
+  background-color: grey;
+}
+
+/* three links targeting the view span classes, target view container*/
+
+/* as its not going anywhere */
+#slider-view-1:target ~ .view-container{
+  left: 0px  
+}
+
+/* move 600px to the left */
+#slider-view-2:target ~ .view-container{
+  left: -540px  
+}
+
+#slider-view-3:target ~ .view-container{
+  left: -1080px  
+}
+
