@@ -12,6 +12,7 @@ export default function () {
       paintPieChart(res.data, lightGreen, darkGreen, category )
         .then(paintAreaChart(lightGreen, category))
       paintLegend(res.data, lightGreen, darkGreen, category)
+
     })
     .catch(err => console.warn(err))
 }

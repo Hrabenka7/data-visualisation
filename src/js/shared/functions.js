@@ -8,6 +8,7 @@ export function formatNumber(value) {
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
 
+//--------------------------------------------------------------------
 
 /** count percentage for each device
  *  @param {int} device  smartphone || tablet.
@@ -26,6 +27,8 @@ export function countPercentage(device, total) {
   let result = (parseInt(device) / parseInt(total)) * 100
   return result 
 }
+
+// -----------------------------------------------------------------------
 
 /** paint donut chart
  *  @param {Object} data  smartphone & tablet & total with their values.
@@ -63,25 +66,20 @@ export async function paintPieChart(data, colorTablet, colorSmartphone, category
     .outerRadius(radius - 10)
     .innerRadius(240);
   
-
   var pie = d3.pie()
     .sort(null)
     .value(function (d) {
       return d.count;
     });
 
-
   /** add pie chart to the div id*/
-
   var svg = d3.select('#donut' + category).append("svg")
     .attr("width", width)
     .attr("height", height)
+    .attr("id", `"donutPie${category}"`)
     .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-    if(svg) {
-      console.log('hey svg just rendered')
-    }
 
   var g = svg.selectAll(".arc")
     .data(pie(dataChart))
@@ -127,7 +125,7 @@ export async function paintPieChart(data, colorTablet, colorSmartphone, category
     .style('fill', '#969696')
 
   g.append("rect")
-    .attr('y', 180)
+    .attr('y', 190)
     .attr('x', 0)
     .attr("width", 5)
     .attr("height", 10)
@@ -188,7 +186,6 @@ export function paintAreaChart(colorTablet, category) {
     .domain([0, 10]);
 
   //var xAxis = d3.axisBottom(x)
-
   //var yAxis = d3.axisLeft(y);
 
   var line = d3.area()
@@ -197,17 +194,13 @@ export function paintAreaChart(colorTablet, category) {
     .y0(height)
     .curve(d3.curveBasis);
 
-  //var svg1 = d3.select("body").append("svg")
-  // (`"#donut${category} svg"`)
+
   var svg1 = d3.select("#donut" + category).select("svg").append("svg")
     .attr("width", width + 60)
     .attr("height", height + 50)
+    .attr("id", `"donutArea${category}"`)
     .append("g")
     .attr("transform", "translate(80, 60)")
-
-  if (svg1) {
-    console.log('svg1 too')
-  }
 
   svg1.append("g")
     .attr("class", "x axis")
@@ -226,13 +219,19 @@ export function paintAreaChart(colorTablet, category) {
     .attr('stroke', colorTablet)
     .attr("stroke-width", 2)
 
+
 }
 
 
 
 
 
-// paint legend
+/** paint legend
+ *  @param {Object} data  smartphone & tablet & total with their values.
+ *  @param {string} colorTablet
+ *  @param {string} colorSmartphone
+ *  @param {string} category visits || impresions || revenue
+ */
 
 export function paintLegend(data, colorTablet, colorSmartphone, category) {
   document.getElementById('percentageTablet' + category)
